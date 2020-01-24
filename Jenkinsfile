@@ -1,7 +1,7 @@
 pipeline{
     agent {
         docker {
-                image "qaninja/node-wd"
+                image "scaramal/node-wd"
                 args "--network=skynet"
             }
     }

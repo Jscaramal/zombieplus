@@ -1,6 +1,6 @@
 pipeline{
     agent {
-        docker {image "scaramal/node-wd"}
+        docker {image "qaninja/node-wd"}
     }
     stages {
         stage('Build'){

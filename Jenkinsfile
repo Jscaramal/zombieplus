@@ -1,6 +1,6 @@
 pipeline{
     agent {
-        docker {image "node"}
+        docker {image "scaramal/node-wd"}
     }
     stages {
         stage('Build'){

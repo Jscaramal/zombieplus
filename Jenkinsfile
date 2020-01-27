@@ -2,7 +2,7 @@ pipeline{
     agent {
         docker {
             image "scaramal/node-wd"
-            args "--network=skynet"
+            // args "--network=skynet"
         }
     }
     stages {

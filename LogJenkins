@@ -1,0 +1,93 @@
+Started by user devops
+Obtained Jenkinsfile from git https://github.com/Jscaramal/zombieplus.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/zombieplus
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Jscaramal/zombieplus.git # timeout=10
+Fetching upstream changes from https://github.com/Jscaramal/zombieplus.git
+ > git --version # timeout=10
+ > git fetch --tags --force --progress -- https://github.com/Jscaramal/zombieplus.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision ba9fecd3c4ced49dc714a3383efefcf8a1017c1b (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ba9fecd3c4ced49dc714a3383efefcf8a1017c1b # timeout=10
+Commit message: "teste network"
+ > git rev-list --no-walk ba9fecd3c4ced49dc714a3383efefcf8a1017c1b # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] isUnix
+[Pipeline] sh
++ docker inspect -f . scaramal/node-wd
+.
+[Pipeline] withDockerContainer
+Jenkins seems to be running inside container b78d97e1f7362f7a0b8a6b945c998920ffbf387f758bcde664ba281fe243b766
+but /var/jenkins_home/workspace/zombieplus could not be found among []
+but /var/jenkins_home/workspace/zombieplus@tmp could not be found among []
+$ docker run -t -d -u 1000:1000 --network skynet -w /var/jenkins_home/workspace/zombieplus -v /var/jenkins_home/workspace/zombieplus:/var/jenkins_home/workspace/zombieplus:rw,z -v /var/jenkins_home/workspace/zombieplus@tmp:/var/jenkins_home/workspace/zombieplus@tmp:rw,z -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** -e ******** scaramal/node-wd cat
+[Pipeline] // withDockerContainer
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+java.io.IOException: Failed to run image 'scaramal/node-wd'. Error: docker: Error response from daemon: network skynet not found.
+	at org.jenkinsci.plugins.docker.workflow.client.DockerClient.run(DockerClient.java:138)
+	at org.jenkinsci.plugins.docker.workflow.WithContainerStep$Execution.start(WithContainerStep.java:199)
+	at org.jenkinsci.plugins.workflow.cps.DSL.invokeStep(DSL.java:286)
+	at org.jenkinsci.plugins.workflow.cps.DSL.invokeMethod(DSL.java:179)
+	at org.jenkinsci.plugins.workflow.cps.CpsScript.invokeMethod(CpsScript.java:122)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:48)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at com.cloudbees.groovy.cps.sandbox.DefaultInvoker.methodCall(DefaultInvoker.java:20)
+	at org.jenkinsci.plugins.docker.workflow.Docker$Image.inside(Docker.groovy:126)
+	at org.jenkinsci.plugins.docker.workflow.Docker.node(Docker.groovy:66)
+	at org.jenkinsci.plugins.docker.workflow.Docker$Image.inside(Docker.groovy:114)
+	at org.jenkinsci.plugins.pipeline.modeldefinition.agent.impl.DockerPipelineScript.runImage(DockerPipelineScript.groovy:54)
+	at org.jenkinsci.plugins.pipeline.modeldefinition.agent.impl.AbstractDockerPipelineScript.configureRegistry(AbstractDockerPipelineScript.groovy:73)
+	at org.jenkinsci.plugins.pipeline.modeldefinition.agent.impl.AbstractDockerPipelineScript.run(AbstractDockerPipelineScript.groovy:52)
+	at org.jenkinsci.plugins.pipeline.modeldefinition.agent.CheckoutScript.checkoutAndRun(CheckoutScript.groovy:61)
+	at ___cps.transform___(Native Method)
+	at com.cloudbees.groovy.cps.impl.ContinuationGroup.methodCall(ContinuationGroup.java:86)
+	at com.cloudbees.groovy.cps.impl.FunctionCallBlock$ContinuationImpl.dispatchOrArg(FunctionCallBlock.java:113)
+	at com.cloudbees.groovy.cps.impl.FunctionCallBlock$ContinuationImpl.fixArg(FunctionCallBlock.java:83)
+	at sun.reflect.GeneratedMethodAccessor95.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at com.cloudbees.groovy.cps.impl.ContinuationPtr$ContinuationImpl.receive(ContinuationPtr.java:72)
+	at com.cloudbees.groovy.cps.impl.ClosureBlock.eval(ClosureBlock.java:46)
+	at com.cloudbees.groovy.cps.Next.step(Next.java:83)
+	at com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:174)
+	at com.cloudbees.groovy.cps.Continuable$1.call(Continuable.java:163)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport$ThreadCategoryInfo.use(GroovyCategorySupport.java:129)
+	at org.codehaus.groovy.runtime.GroovyCategorySupport.use(GroovyCategorySupport.java:268)
+	at com.cloudbees.groovy.cps.Continuable.run0(Continuable.java:163)
+	at org.jenkinsci.plugins.workflow.cps.SandboxContinuable.access$001(SandboxContinuable.java:18)
+	at org.jenkinsci.plugins.workflow.cps.SandboxContinuable.run0(SandboxContinuable.java:51)
+	at org.jenkinsci.plugins.workflow.cps.CpsThread.runNextChunk(CpsThread.java:185)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.run(CpsThreadGroup.java:405)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup.access$400(CpsThreadGroup.java:96)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:317)
+	at org.jenkinsci.plugins.workflow.cps.CpsThreadGroup$2.call(CpsThreadGroup.java:281)
+	at org.jenkinsci.plugins.workflow.cps.CpsVmExecutorService$2.call(CpsVmExecutorService.java:67)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at hudson.remoting.SingleLaneExecutorService$1.run(SingleLaneExecutorService.java:131)
+	at jenkins.util.ContextResettingExecutorService$1.run(ContextResettingExecutorService.java:28)
+	at jenkins.security.ImpersonatingExecutorService$1.run(ImpersonatingExecutorService.java:59)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Finished: FAILURE

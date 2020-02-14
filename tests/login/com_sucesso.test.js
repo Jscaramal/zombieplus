@@ -6,6 +6,5 @@ module.exports = {
 
         login.with('zumbi@dospalmares.com.br', 'pwd123')
         sidebar.expectLoggedUser('Quilombo')
-
     }
 }

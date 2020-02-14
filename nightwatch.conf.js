@@ -18,8 +18,14 @@ module.exports = {
     //     enabled: true,
     //     workers: 2
     // },
+    screenshots: {
+        enabled: true,
+        on_failure: true,
+        on_error: true,
+        path: 'tests_output/'
+    },
     test_settings: {
-       
+
         default: {
             launch_url: testUrl,
             globals: {
@@ -36,20 +42,20 @@ module.exports = {
         },
 
         headless: {
-                launch_url: testUrl,
-                globals: {
-                    waitForConditionTimeout: defaultTimeout // As vezes a conexão com a internet/rede fica lenta
-                },
-                webdriver: {
-                    server_path: chromedriver.path,
-                    port: 9515
-                },
-                desiredCapabilities: {
-                    browserName: "chrome",
-                    chromeOptions: {
-                        w3c: false,
-                        args: ['--headless', '--no-sandbox']
-                    
+            launch_url: testUrl,
+            globals: {
+                waitForConditionTimeout: defaultTimeout // As vezes a conexão com a internet/rede fica lenta
+            },
+            webdriver: {
+                server_path: chromedriver.path,
+                port: 9515
+            },
+            desiredCapabilities: {
+                browserName: "chrome",
+                chromeOptions: {
+                    w3c: false,
+                    args: ['--headless', '--no-sandbox']
+
                 }
             }
         },
